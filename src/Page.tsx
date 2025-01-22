@@ -1,27 +1,50 @@
-import { useRoute, routes } from "./router";
-import type { Route } from "type-route";
+import { lazy, Suspense } from "react";
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Home = lazy(() => import("./pages/Home"));
+const Project = lazy(() => import("./pages/Project"));
+import { useRoute } from "./router";
 
 export function Page() {
-  const route = useRoute();
+    const route = useRoute();
 
-  return (
-    <>
-      {route.name === "home" && <HomePage />}
-      {route.name === "userList" && <UserListPage route={route} />}
-      {route.name === "user" && <UserPage route={route} />}
-      {route.name === false && "Not Found"}
-    </>
-  );
-}
+    /*
+    if (route.name === "home") {
+        return <Home />;
+    } else if (route.name === "about") {
+        return <About />;
+    } else if (route.name === "project") {
+        return <Project />;
+    } else if (route.name === "contact") {
+        return <Contact />;
+    } else if (route.name === false) {
+        return <h1>Page Not Found</h1>;
+    }
+    */
 
-function HomePage() {
-  return <div>Home Page</div>;
-}
+    return (
+        <Suspense fallback={<h1>Loading page...</h1>}>
+            {(() => {
+                switch (route.name) {
+                    case "home": return <Home />;
+                    case "about": return <About />;
+                    case "project": return <Project />;
+                    case "contact": return <Contact />;
+                    case false: return <h1>Not found</h1>
+                }
+            })()}
+        </Suspense>
+    );
 
-function UserListPage({ route }: { route: Route<typeof routes.userList> }) {
-  return <div>UserList Page: {route.params.page}</div>;
-}
-
-function UserPage({ route }: { route: Route<typeof routes.user> }) {
-  return <div>User: {route.params.userId}</div>;
+    /*
+    return (
+        <Suspense>
+            {route.name === "home" && <Home />}
+            {route.name === "about" && <About />}
+            {route.name === "project" && <Project />}
+            {route.name === "contact" && <Contact />}
+            {route.name === false && "Not Found"}
+        </Suspense>
+    );
+    */
 }

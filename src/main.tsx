@@ -6,7 +6,7 @@ import { RouteProvider } from "./router"
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RouteProvider>
-      <App />
+        <App />
     </RouteProvider>
   </StrictMode>
 )
