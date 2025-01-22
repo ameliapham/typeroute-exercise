@@ -1,16 +1,20 @@
 
+import type { Route } from "type-route";
+import { routes } from "../router";
+
 type Props = {
-    projectId: number;
+    route: Route<typeof routes.project>;
 }
 
 export default function Project(props: Props) {
-    const { projectId } = props;
+
+    const { route } = props;
     
     return (
         <div>
             <h1>Project Page</h1>
             {(() => {
-                switch (projectId) {
+                switch (route.params.projectId) {
                     case 1: return <Project1 />;
                     case 2: return <Project2 />;
                     case 3: return <Project3 />;

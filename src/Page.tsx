@@ -28,7 +28,7 @@ export function Page() {
                 switch (route.name) {
                     case "home": return <Home />;
                     case "about": return <About />;
-                    case "project": return <Project projectId={route.params.projectId}/>;
+                    case "project": return <Project route={route}/>;
                     case "contact": return <Contact />;
                     case false: return <h1>Not found</h1>
                 }
