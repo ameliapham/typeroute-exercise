@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { routes } from '../router';
 import type { Route } from 'type-route';
 
@@ -8,16 +7,22 @@ type Props = {
 
 export default function Home(props: Props) {
   const { route } = props
-  const [count, setCount] = useState(route.params.count ?? 0);
-  useEffect(() => {
-    routes.home({count}).replace()
-  },[count])
 
   return (
     <>
       <h1>Home Page</h1>
-      <button onClick={() => setCount(count + 1)}> Click me </button>
-      <p> You have clicked {count} time</p>
+      <button
+        onClick={() => {
+
+          routes.home({
+            count: route.params.count + 1
+          }).replace();
+
+        }}
+      >
+        Click me
+      </button>
+      <p> You have clicked {route.params.count} time</p>
     </>
   )
 }
