@@ -23,6 +23,15 @@ export default function Home(props: Props) {
         Click me
       </button>
       <p> You have clicked {route.params.count} time</p>
+
+      {(() => {
+        if (route.params.count >= 5) {
+          return <a {...routes.contact().link}> Contact me </a>
+        }
+      })()}
+
+      {route.params.count >= 10 && <a {...routes.about().link}> About me </a>}
+
     </>
   )
 }
