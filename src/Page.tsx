@@ -26,7 +26,7 @@ export function Page() {
         <Suspense fallback={<h1>Loading page...</h1>}>
             {(() => {
                 switch (route.name) {
-                    case "home": return <Home />;
+                    case "home": return <Home route={route}/>;
                     case "about": return <About />;
                     case "project": return <Project route={route}/>;
                     case "contact": return <Contact />;

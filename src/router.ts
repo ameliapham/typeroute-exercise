@@ -1,7 +1,12 @@
 import { createRouter, defineRoute, param } from "type-route";
 
 export const { RouteProvider, useRoute, routes } = createRouter({
-  home: defineRoute("/"),
+  home: defineRoute(
+    {
+      count : param.query.optional.number
+    },
+    () => "/"
+  ),
   about: defineRoute("/about"),
   contact: defineRoute("/contact"),
   project: defineRoute(
@@ -10,4 +15,5 @@ export const { RouteProvider, useRoute, routes } = createRouter({
     },
     (p) => `/project/${p.projectId}`
   ),
+
 });
